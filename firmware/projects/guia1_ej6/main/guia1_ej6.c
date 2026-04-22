@@ -1,4 +1,4 @@
-/*! @mainpage Template
+/*! @mainpage Controlador de display LCD
  *
  * @section genDesc General Description
  *
@@ -8,16 +8,24 @@
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |   Display      |   ESP-32   	|
+ * |:--------------:|:-------------:|
+ * | 	Vcc 	    |	5V      	|
+ * | 	BCD1		| 	GPIO_20		|
+ * | 	BCD2	 	| 	GPIO_21		|
+ * | 	BCD3	 	| 	GPIO_22		|
+ * | 	BCD4	 	| 	GPIO_23		|
+ * | 	SEL1	 	| 	GPIO_19		|
+ * | 	SEL2	 	| 	GPIO_18		|
+ * | 	SEL3	 	| 	GPIO_9		|
+ * | 	Gnd 	    | 	GND     	|
  *
  *
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 08/04/2026 | Documentacion 	                         |
  *
  * @author Juan Ignacio Trulls Schmidt (juanitrulls@gmail.com)
  *
@@ -32,6 +40,12 @@
 /*==================[macros and definitions]=================================*/
 
 /*==================[internal data definition]===============================*/
+
+/**
+ * @brief Estructura para configurar un GPIO
+ * 
+ * Contiene el número de pin y la dirección del mismo.
+*/
 
 typedef struct
 {
@@ -50,6 +64,15 @@ gpioConf_t gpio_vector[4] = {
 
 /*==================[internal functions declaration]=========================*/
 
+/**
+ * @brief Configura los pines GPIO según un valor BCD
+ * 
+ * Esta función toma un número de 4 bits y asigna cada bit a un GPIO correspondiente.
+ * 
+ * @param entero Valor BCD a representar (0-15)
+ * @param bcd Vector de estructuras con la configuración de los GPIO
+*/
+
 void cambia_estado (uint8_t entero, gpioConf_t* bcd){
 	for (int i = 0; i < 4; i++){
 		uint8_t bit = (entero >> i) & 0x01;
@@ -66,6 +89,18 @@ void cambia_estado (uint8_t entero, gpioConf_t* bcd){
 
 /*==================[external functions definition]==========================*/
 
+/**
+ * @brief Convierte un número entero en un arreglo de dígitos BCD
+ * 
+ * Separa un número en sus dígitos individuales.
+ * 
+ * @param data Número a convertir
+ * @param digits Cantidad de dígitos a extraer
+ * @param bcd_number Vector donde se almacenan los dígitos
+ * 
+ * @return 0 si la conversión fue exitosa
+*/
+
 int8_t  convertToBcdArray (uint32_t data, uint8_t digits, uint8_t * bcd_number){
 	for(uint8_t i = 0; i < digits; i++){
 		bcd_number[digits - i - 1] = data % 10;
@@ -73,6 +108,19 @@ int8_t  convertToBcdArray (uint32_t data, uint8_t digits, uint8_t * bcd_number){
 	}
 	return 0;
 }
+
+/**
+ * @brief Muestra un número en un display multiplexado
+ * 
+ * Utiliza multiplexación para mostrar un número en varios dígitos, activando uno por vez a alta velocidad.
+ * 
+ * @param data Número a mostrar
+ * @param digits Cantidad de dígitos del display
+ * @param bcd Vector de GPIO para los bits BCD
+ * @param sel Vector de GPIO para selección de dígitos
+ * 
+ * @note Esta función contiene un bucle infinito para mantener la visualización
+*/
 
 void mostrar_numero(uint32_t data, uint8_t digits, gpioConf_t* bcd, gpioConf_t* sel)
 {
@@ -102,6 +150,12 @@ void mostrar_numero(uint32_t data, uint8_t digits, gpioConf_t* bcd, gpioConf_t* 
         }
     }
 }
+
+/**
+ * @brief Función principal del programa
+ * 
+ * Inicializa los GPIO y muestra un número en el display.
+*/
 
 void app_main(void)
 {
