@@ -1,40 +1,59 @@
 {
     "folders": [
         {
-            "path": "./drivers"
+            "name": "drivers",
+            "path": "drivers"
         },
         {
-            "path": "./projects/0_blinking"
+            "name": "0_blinking",
+            "path": "projects/0_blinking"
         },
         {
-            "path": "./projects/1_blinking_switch"
+            "name": "1_blinking_switch",
+            "path": "projects/1_blinking_switch"
         },
         {
+            "name": "2_blinking_tasks",
             "path": "projects/2_blinking_tasks"
         },
         {
+            "name": "3_blinking_timer",
             "path": "projects/3_blinking_timer"
         },
         {
-            "path": "./projects/x_template"
+            "name": "x_template",
+            "path": "projects/x_template"
         },
         {
+            "name": "guia1_ej3",
             "path": "projects/guia1_ej3"
         },
         {
+            "name": "guia1_ej4",
             "path": "projects/guia1_ej4"
         },
         {
+            "name": "guia1_ej5",
             "path": "projects/guia1_ej5"
         },
         {
+            "name": "guia1_ej6",
             "path": "projects/guia1_ej6"
         },
         {
+            "name": "actividad1_proyecto2",
             "path": "projects/actividad1_proyecto2"
         },
         {
+            "name": "actividad2_proyecto2",
             "path": "projects/actividad2_proyecto2"
+        },
+        {
+            "name": "actividad3_proyecto2",
+            "path": "projects/actividad3_proyecto2"
+        },
+        {
+            "path": "projects/actividad4_proyecto2"
         }
     ],
     "settings": {

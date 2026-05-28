@@ -87,7 +87,7 @@ void app_main(void)
 
 	vTaskDelay(2000);
 
-	    // Configurar estructura
+	// Configurar estructura
     my_leds.mode = ON;
     my_leds.n_led = LED_1;
     my_leds.n_ciclos = 10;
@@ -98,7 +98,7 @@ void app_main(void)
 
 	vTaskDelay(2000);
 
-		    // Configurar estructura
+	// Configurar estructura
     my_leds.mode = ON;
     my_leds.n_led = LED_2;
     my_leds.n_ciclos = 10;
