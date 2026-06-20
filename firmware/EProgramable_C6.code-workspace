@@ -54,6 +54,12 @@
         },
         {
             "path": "projects/actividad4_proyecto2"
+        },
+        {
+            "path": "projects/proyecto_final"
+        },
+        {
+            "path": "projects/prueba_encoder"
         }
     ],
     "settings": {
